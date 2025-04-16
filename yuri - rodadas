@@ -1,0 +1,70 @@
+import java.util.ArrayList;
+import java.util.List;
+
+
+class Jogo {
+    private String timeCasa;
+    private String timeVisitante;
+
+    public Jogo(String timeCasa, String timeVisitante) {
+        this.timeCasa = timeCasa;
+        this.timeVisitante = timeVisitante;
+    }
+
+    public String toString() {
+        return timeCasa + " vs " + timeVisitante;
+    }
+}
+
+
+class Rodada {
+    private int numero;
+    private String data;
+    private List<Jogo> jogos;
+
+    public Rodada(int numero, String data) {
+        this.numero = numero;
+        this.data = data;
+        this.jogos = new ArrayList<Jogo>();
+    }
+
+    public void adicionarJogo(Jogo jogo) {
+        jogos.add(jogo);
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Rodada ").append(numero).append(" - ").append(data).append("\n");
+        for (Jogo jogo : jogos) {
+            sb.append(" - ").append(jogo).append("\n");
+        }
+        return sb.toString();
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        List<Rodada> rodadas = new ArrayList<Rodada>();
+
+        rodadas.add(criarRodada(1, "16/04/2025", "Flamengo", "Vasco", "Palmeiras", "Corinthians"));
+        rodadas.add(criarRodada(2, "23/04/2025", "Grêmio", "Internacional", "Cruzeiro", "Atlético-MG"));
+        rodadas.add(criarRodada(3, "30/04/2025", "Bahia", "Vitória", "Ceará", "Fortaleza"));
+        rodadas.add(criarRodada(4, "07/05/2025", "Santos", "São Paulo", "Botafogo", "Fluminense"));
+        rodadas.add(criarRodada(5, "14/05/2025", "Athletico-PR", "Coritiba", "Náutico", "Sport"));
+        rodadas.add(criarRodada(6, "21/05/2025", "Chapecoense", "Avaí", "Ponte Preta", "Guarani"));
+        rodadas.add(criarRodada(7, "28/05/2025", "Cuiabá", "Bragantino", "Sampaio Corrêa", "CSA"));
+
+        for (Rodada rodada : rodadas) {
+            System.out.println(rodada);
+            System.out.println("---------------------------");
+        }
+    }
+
+    public static Rodada criarRodada(int numero, String data, String time1, String time2, String time3, String time4) {
+        Rodada rodada = new Rodada(numero, data);
+        rodada.adicionarJogo(new Jogo(time1, time2));
+        rodada.adicionarJogo(new Jogo(time3, time4));
+        return rodada;
+    }
+}
